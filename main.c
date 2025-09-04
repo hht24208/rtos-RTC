@@ -174,11 +174,11 @@ rtc_setup(void) {
 	// RCC_HSE, RCC_LSE, RCC_LSI
 	rtc_awake_from_off(RCC_HSE); 
 	rtc_set_prescale_val(62500);
-	rtc_set_counter_val(0xFFFFFFF0);
+	rtc_set_counter_val(0xFFFFFFF0); 
 
-	nvic_enable_irq(NVIC_RTC_IRQ);
+	nvic_enable_irq(NVIC_RTC_IRQ);//Line 179 enables the interrupt controller for the rtc_isr() interrupt handler
 
-	cm_disable_interrupts();
+	cm_disable_interrupts(); //All interrupts are temporarily suppressed in line 181 to allow the final interrupt setup to occur without generating interrupts
 	rtc_clear_flag(RTC_SEC);
 	rtc_clear_flag(RTC_ALR);
 	rtc_clear_flag(RTC_OW);
